@@ -225,7 +225,7 @@ But only if you are working alone and you don’t want to test something.
 
 # Testing
 
-# Branches
+## Branches
 
 ::: {.incremental}
 * Are versions of the code identified with a name (besides the existing hash)
