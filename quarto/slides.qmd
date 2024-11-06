@@ -208,6 +208,74 @@ git config --global user.email "youremail@yourdomain.com"
 
 # Branches
 
+::: {.incremental}
+* Are versions of the code identified with a name (besides the existing hash)
+* Are used to encapsulate the changes required for a feature/bugfix
+* Allow incremental development without impacting the other branches
+:::
+
+::: {.notes}
+Make sure to introduce feature and bugfix
+:::
+
+## Create a branch {.leftalign}
+
+Create a branch `develop` to work on a feature
+
+```bash
+git branch develop
+git switch develop
+```
+   
+```{mermaid}
+gitGraph
+   commit
+   commit
+   branch develop
+   checkout develop
+   commit
+   commit
+```
+
+::: {.fragment fragment-index=0}
+Show differences between two branches
+```bash
+git diff develop..main
+```
+:::
+
+::: {.notes}
+* Git branches are just pointers to a hash!
+* Sometimes it is nice to visualize a branch as a sequence of commits (e.g. "feature branch"), but technically it is just a label for a commit
+:::
+
+## Merge a branch
+
+Merge the commits of `develop` into `main`
+
+```bash
+git switch main
+git merge develop
+```
+
+```{mermaid}
+gitGraph
+   commit
+   commit
+   branch develop
+   checkout develop
+   commit
+   commit
+   checkout main
+   merge develop
+```
+
+:::{.notes}
+After the example: ask about differences to graph and their git log.
+By default, git will perform a fast-forward merge and omit the merge commit.
+:::
+
+
 
 
 

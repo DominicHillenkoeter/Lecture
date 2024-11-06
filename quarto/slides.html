@@ -570,7 +570,109 @@
 <section>
 <section id="branches" class="title-slide slide level1 center">
 <h1>Branches</h1>
-
+<div>
+<ul>
+<li class="fragment">Are versions of the code identified with a name (besides the existing hash)</li>
+<li class="fragment">Are used to encapsulate the changes required for a feature/bugfix</li>
+<li class="fragment">Allow incremental development without impacting the other branches</li>
+</ul>
+</div>
+<aside class="notes">
+<p>Make sure to introduce feature and bugfix</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="create-a-branch" class="slide level2 leftalign center">
+<h2>Create a branch</h2>
+<p>Create a branch <code>develop</code> to work on a feature</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href=""></a><span class="fu">git</span> branch develop</span>
+<span id="cb10-2"><a href=""></a><span class="fu">git</span> switch develop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">gitGraph
+   commit
+   commit
+   branch develop
+   checkout develop
+   commit
+   commit
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="fragment" data-fragment-index="0">
+<p>Show differences between two branches</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href=""></a><span class="fu">git</span> diff develop..main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<ul>
+<li>Git branches are just pointers to a hash!</li>
+<li>Sometimes it is nice to visualize a branch as a sequence of commits (e.g.&nbsp;“feature branch”), but technically it is just a label for a commit</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="merge-a-branch" class="slide level2 center">
+<h2>Merge a branch</h2>
+<p>Merge the commits of <code>develop</code> into <code>main</code></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href=""></a><span class="fu">git</span> switch main</span>
+<span id="cb12-2"><a href=""></a><span class="fu">git</span> merge develop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">gitGraph
+   commit
+   commit
+   branch develop
+   checkout develop
+   commit
+   commit
+   checkout main
+   merge develop
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>After the example: ask about differences to graph and their git log. By default, git will perform a fast-forward merge and omit the merge commit.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="solving-conflicts" class="slide level2 leftalign center" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Solving conflicts</h2>
@@ -579,11 +681,11 @@
 <div class="code-with-filename-file">
 <pre><strong>file.txt</strong></pre>
 </div>
-<div class="sourceCode" id="cb10" data-filename="file.txt"><pre class="sourceCode numberSource raw number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode hljs"><span id="cb10-1" class="hljs-ln-code"><a href=""></a>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
-<span id="cb10-2" class="hljs-ln-code"><a href=""></a>This course is nice!</span>
-<span id="cb10-3" class="hljs-ln-code"><a href=""></a>=======</span>
-<span id="cb10-4" class="hljs-ln-code"><a href=""></a>This course is awesome!</span>
-<span id="cb10-5" class="hljs-ln-code"><a href=""></a>&gt;&gt;&gt;&gt;&gt;&gt;&gt; bob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13" data-filename="file.txt"><pre class="sourceCode numberSource raw number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode hljs"><span id="cb13-1" class="hljs-ln-code"><a href=""></a>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
+<span id="cb13-2" class="hljs-ln-code"><a href=""></a>This course is nice!</span>
+<span id="cb13-3" class="hljs-ln-code"><a href=""></a>=======</span>
+<span id="cb13-4" class="hljs-ln-code"><a href=""></a>This course is awesome!</span>
+<span id="cb13-5" class="hljs-ln-code"><a href=""></a>&gt;&gt;&gt;&gt;&gt;&gt;&gt; bob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="solving-conflicts-1" class="slide level2 leftalign center" data-auto-animate="true" data-visibility="uncounted">
@@ -593,12 +695,12 @@
 <div class="code-with-filename-file">
 <pre><strong>file.txt</strong></pre>
 </div>
-<div class="sourceCode" id="cb11" data-filename="file.txt"><pre class="sourceCode numberSource raw number-lines code-with-copy"><code class="sourceCode"><span id="cb11-1"><a href=""></a>This course is awesome! </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14" data-filename="file.txt"><pre class="sourceCode numberSource raw number-lines code-with-copy"><code class="sourceCode"><span id="cb14-1"><a href=""></a>This course is awesome! </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <p>After resolving the conflict, you have to commit your changes</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource {sh} number-lines code-with-copy"><code class="sourceCode"><span id="cb12-1"><a href=""></a>git add file.txt</span>
-<span id="cb12-2"><a href=""></a>git commit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource {sh} number-lines code-with-copy"><code class="sourceCode"><span id="cb15-1"><a href=""></a>git add file.txt</span>
+<span id="cb15-2"><a href=""></a>git commit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
