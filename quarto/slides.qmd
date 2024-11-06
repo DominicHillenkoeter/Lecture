@@ -112,7 +112,7 @@ You can get GitHub Copilot/ChatGPT/... to write the command for you
 
 ## Terminal
 
-Alot of tools interacting with the terminal but for us most interasting are `git` and `python` 
+Alot of tools interacting with the terminal but for us most interasting are `Git` and `python` 
 
 ## Some basic commands
 
@@ -145,6 +145,53 @@ touch hello.txt
 :::
 
 
+# Using Git
+
+
+
+
+
+## As easy as **1, 2, 3**
+```{.bash code-line-numbers="3-5"}
+mkdir my_repo
+cd my_repo
+git init .  # Initialize a repository
+git add .  # Add the whole directory content (don't do that)
+git commit -m "Initial commit"  # Commit your changes
+```
+
+```{mermaid}
+gitGraph
+   commit id: "df21a: Initial commit"
+```
+
+## Sequence of snapshots
+
+Commits are linked to form a sequence of snapshots:
+
+```bash
+echo "hello" > world.txt
+git add world.txt
+git commit -m "add world"
+```
+
+```{mermaid}
+gitGraph
+   commit id: "df21a: Initial commit"
+   commit id: "315f2: add world"
+```
+## The basic workflow
+
+* Git offers plenty of functionality that is extensively documented
+
+* You will only need a **handful of commands** in your day to day work:
+
+  ```bash
+  git status  # show which files have changed
+  git diff my_file  # show what has changed
+  git add my_file  # stage changes
+  git commit  # commit your changes
+   ```
 
 
 ## Configuration
@@ -158,18 +205,17 @@ git config --global user.name "Your Name"
 git config --global user.email "youremail@yourdomain.com"
 ```
 
-## Hands-on Session {.handson}
-
-1. Configure the username and email adress in your local git client
-2. Create a directory and initialize a Git repository
-3. Create a file and add it to the repo
-3. Change the file, inspect the differences, and commit the changes
-
-:::{.info .smaller}
-On Levante: `module load git`
-:::
 
 # Branches
+
+
+
+
+
+
+
+
+
 
 ## Solving conflicts {auto-animate=true .leftalign}
 

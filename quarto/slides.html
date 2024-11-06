@@ -386,6 +386,10 @@
       margin-right: 0; 
     }
   </style>
+  <meta name="mermaid-theme" content="default">
+  <script src="slides_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="slides_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="slides_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -475,7 +479,7 @@
 </section>
 <section id="terminal-1" class="slide level2 center">
 <h2>Terminal</h2>
-<p>Alot of tools interacting with the terminal but for us most interasting are <code>git</code> and <code>python</code></p>
+<p>Alot of tools interacting with the terminal but for us most interasting are <code>Git</code> and <code>python</code></p>
 </section>
 <section id="some-basic-commands" class="slide level2 center">
 <h2>Some basic commands</h2>
@@ -495,6 +499,64 @@
 <p>create a file</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource {sh} number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a href=""></a>touch hello.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section></section>
+<section>
+<section id="using-git" class="title-slide slide level1 center">
+<h1>Using Git</h1>
+
+</section>
+<section id="as-easy-as-1-2-3" class="slide level2 center">
+<h2>As easy as <strong>1, 2, 3</strong></h2>
+<div class="sourceCode" id="cb6" data-code-line-numbers="3-5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="fu">mkdir</span> my_repo</span>
+<span id="cb6-2"><a href=""></a><span class="bu">cd</span> my_repo</span>
+<span id="cb6-3"><a href=""></a><span class="fu">git</span> init .  <span class="co"># Initialize a repository</span></span>
+<span id="cb6-4"><a href=""></a><span class="fu">git</span> add .  <span class="co"># Add the whole directory content (don't do that)</span></span>
+<span id="cb6-5"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Initial commit"</span>  <span class="co"># Commit your changes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">gitGraph
+   commit id: "df21a: Initial commit"
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="sequence-of-snapshots" class="slide level2 center">
+<h2>Sequence of snapshots</h2>
+<p>Commits are linked to form a sequence of snapshots:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="bu">echo</span> <span class="st">"hello"</span> <span class="op">&gt;</span> world.txt</span>
+<span id="cb7-2"><a href=""></a><span class="fu">git</span> add world.txt</span>
+<span id="cb7-3"><a href=""></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"add world"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">gitGraph
+   commit id: "df21a: Initial commit"
+   commit id: "315f2: add world"
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-basic-workflow" class="slide level2 center">
+<h2>The basic workflow</h2>
+<ul>
+<li><p>Git offers plenty of functionality that is extensively documented</p></li>
+<li><p>You will only need a <strong>handful of commands</strong> in your day to day work:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="fu">git</span> status  <span class="co"># show which files have changed</span></span>
+<span id="cb8-2"><a href=""></a><span class="fu">git</span> diff my_file  <span class="co"># show what has changed</span></span>
+<span id="cb8-3"><a href=""></a><span class="fu">git</span> add my_file  <span class="co"># stage changes</span></span>
+<span id="cb8-4"><a href=""></a><span class="fu">git</span> commit  <span class="co"># commit your changes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
 </section>
 <section id="configuration" class="slide level2 center">
 <h2>Configuration</h2>
@@ -502,20 +564,8 @@
 <li><p>Each commit is attributed to an author</p></li>
 <li><p>The concept or authorship is heavily used on other platforms (e.g.&nbsp;GitLab)</p></li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span>
-<span id="cb6-2"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"youremail@yourdomain.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="hands-on-session" class="slide level2 handson center">
-<h2>Hands-on Session</h2>
-<ol type="1">
-<li>Configure the username and email adress in your local git client</li>
-<li>Create a directory and initialize a Git repository</li>
-<li>Create a file and add it to the repo</li>
-<li>Change the file, inspect the differences, and commit the changes</li>
-</ol>
-<div class="info smaller">
-<p>On Levante: <code>module load git</code></p>
-</div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span>
+<span id="cb9-2"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"youremail@yourdomain.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
 <section id="branches" class="title-slide slide level1 center">
@@ -529,11 +579,11 @@
 <div class="code-with-filename-file">
 <pre><strong>file.txt</strong></pre>
 </div>
-<div class="sourceCode" id="cb7" data-filename="file.txt"><pre class="sourceCode numberSource raw number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode hljs"><span id="cb7-1" class="hljs-ln-code"><a href=""></a>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
-<span id="cb7-2" class="hljs-ln-code"><a href=""></a>This course is nice!</span>
-<span id="cb7-3" class="hljs-ln-code"><a href=""></a>=======</span>
-<span id="cb7-4" class="hljs-ln-code"><a href=""></a>This course is awesome!</span>
-<span id="cb7-5" class="hljs-ln-code"><a href=""></a>&gt;&gt;&gt;&gt;&gt;&gt;&gt; bob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10" data-filename="file.txt"><pre class="sourceCode numberSource raw number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode hljs"><span id="cb10-1" class="hljs-ln-code"><a href=""></a>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
+<span id="cb10-2" class="hljs-ln-code"><a href=""></a>This course is nice!</span>
+<span id="cb10-3" class="hljs-ln-code"><a href=""></a>=======</span>
+<span id="cb10-4" class="hljs-ln-code"><a href=""></a>This course is awesome!</span>
+<span id="cb10-5" class="hljs-ln-code"><a href=""></a>&gt;&gt;&gt;&gt;&gt;&gt;&gt; bob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="solving-conflicts-1" class="slide level2 leftalign center" data-auto-animate="true" data-visibility="uncounted">
@@ -543,12 +593,12 @@
 <div class="code-with-filename-file">
 <pre><strong>file.txt</strong></pre>
 </div>
-<div class="sourceCode" id="cb8" data-filename="file.txt"><pre class="sourceCode numberSource raw number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a href=""></a>This course is awesome! </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11" data-filename="file.txt"><pre class="sourceCode numberSource raw number-lines code-with-copy"><code class="sourceCode"><span id="cb11-1"><a href=""></a>This course is awesome! </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <p>After resolving the conflict, you have to commit your changes</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource {sh} number-lines code-with-copy"><code class="sourceCode"><span id="cb9-1"><a href=""></a>git add file.txt</span>
-<span id="cb9-2"><a href=""></a>git commit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource {sh} number-lines code-with-copy"><code class="sourceCode"><span id="cb12-1"><a href=""></a>git add file.txt</span>
+<span id="cb12-2"><a href=""></a>git commit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
