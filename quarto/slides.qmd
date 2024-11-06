@@ -1,27 +1,200 @@
 ---
-title: "Quarto Basics"
+title: GIT
 format:
-  html:
-    code-fold: true
-jupyter: python3
+  revealjs:
+    transition: slide
+    slide-number: true
+    code-background: true
+    # logo: ../../static/logos.png
+    # footer: "[Generic Software Skills](../../index.html) | [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/)"
+    theme: [default, custom.scss]
+    chalkboard:
+      buttons: true
+    navigation-mode: linear
+    auto-stretch: true
+    center: true
+    mermaid:
+      theme: default
+
+execute:
+  cache: true
 ---
+  
+# What is GIT ?
 
-For a demonstration of a line plot on a polar axis, see @fig-polar.
+## Version Control System
+- Manage a sequence of snapshots
+- Provide tools to handle changes 
+- Provide tools for collaboration 
 
-```{python}
-#| label: fig-polar
-#| fig-cap: "A line plot on a polar axis"
 
-import numpy as np
-import matplotlib.pyplot as plt
 
-r = np.arange(0, 2, 0.01)
-theta = 4 * np.pi * r
-fig, ax = plt.subplots(
-  subplot_kw = {'projection': 'polar'} 
-)
-ax.plot(theta, r)
-ax.set_rticks([0.5, 1, 1.5, 2])
-ax.grid(True)
-plt.show()
+## Why version control ? 
+- Exchange
+- Collaboration 
+- Storing version 
+- Tracking 
+- Backup 
+
+
+
+
+## Git
+There are many version control systems out there (e.g. Subversion, CVS, Mercurial). We will focus on [Git](http://git-scm.com) which is the **de facto standard**
+
+![](https://git-scm.com/images/logos/downloads/Git-Logo-2Color.svg "Git logo"){height=10%}
+
+
+# Using the terminal
+
+## Terminal
+Interface between the user and the computer 
+![](terminal.png){width=80%}
+
+Equivalent to a **G**raphical **U**ser **I**nterface (**GUI**)
+
+. . .
+
+But more powerfull
+
+## More powerfull ? 
+- **all** tasks faster on the CPU side (not necessarly on human side)
+- finer control in the interaction with the computer
+- repated tasks can be automated
+
+## Example
+Find and rename all files which are of type `.nc`
+
+:::: {.columns} 
+
+::: {.column width="20%"}
+
+Task
+
+Find
+
+Rename
+:::
+
+::: {.column width="40%"}
+GUI
+
+easy
+
+teadious
+:::
+
+::: {.column width="40%"}
+Terminal
+
+easy 
+
+easy 
+:::
+
+
+::::
+
+``` {.sh}
+find . -name "*.nc" -exec mv {} right_name{} \;
 ```
+
+. . .
+
+You can get GitHub Copilot/ChatGPT/... to write the command for you
+
+. . .
+
+❗️But you should understand what the command does❗️
+
+
+
+
+## Terminal
+
+Alot of tools interacting with the terminal but for us most interasting are `git` and `python` 
+
+## Some basic commands
+
+:::{.fragment fragment-index=0}
+`c`hange `d`irectory
+```{sh}
+cd path/to/directory
+```
+:::
+
+:::{.fragment fragment-index=1}
+`l`i`s`t files
+```{sh}
+ls
+```
+:::
+
+:::{.fragment fragment-index=2}
+`m`a`k`e `dir`ectory
+```{sh}
+mkdir directory_name
+```
+:::
+
+:::{.fragment fragment-index=3}
+create a file
+```{sh}
+touch hello.txt
+```
+:::
+
+
+
+
+## Configuration
+
+* Each commit is attributed to an author
+
+* The concept or authorship is heavily used on other platforms (e.g. GitLab)
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "youremail@yourdomain.com"
+```
+
+## Hands-on Session {.handson}
+
+1. Configure the username and email adress in your local git client
+2. Create a directory and initialize a Git repository
+3. Create a file and add it to the repo
+3. Change the file, inspect the differences, and commit the changes
+
+:::{.info .smaller}
+On Levante: `module load git`
+:::
+
+# Branches
+
+## Solving conflicts {auto-animate=true .leftalign}
+
+Solving conflicts requires **your decision**
+   
+```{.raw filename=file.txt}
+<<<<<<< HEAD
+This course is nice!
+=======
+This course is awesome!
+>>>>>>> bob
+```
+
+## Solving conflicts {auto-animate=true visibility="uncounted" .leftalign}
+
+Solving conflicts requires **your decision**
+
+```{.raw filename=file.txt}
+This course is awesome! 
+```
+
+:::{.fragment}
+After resolving the conflict, you have to commit your changes
+```{sh}
+git add file.txt
+git commit
+```
+:::
