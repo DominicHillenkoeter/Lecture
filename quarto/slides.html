@@ -566,7 +566,21 @@
 </ul>
 <div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span>
 <span id="cb9-2"><a href=""></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"youremail@yourdomain.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="is-this-all" class="slide level2 center">
+<h2>Is this all ?</h2>
+<div class="fragmen" data-fragment-index="1">
+<p>Basically Yes!</p>
+</div>
+<div class="fragment" data-fragment-index="2">
+<p>But only if you are working alone and you don’t want to test something.</p>
+</div>
 </section></section>
+<section id="testing" class="title-slide slide level1 center">
+<h1>Testing</h1>
+
+</section>
+
 <section>
 <section id="branches" class="title-slide slide level1 center">
 <h1>Branches</h1>
@@ -673,6 +687,84 @@
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section></section>
+<section>
+<section id="collaboration" class="title-slide slide level1 center">
+<h1>Collaboration</h1>
+
+</section>
+<section id="conflicts" class="slide level2 leftalign center">
+<h2>Conflicts</h2>
+<p>Collaboration can lead to disagreements</p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">gitGraph
+   commit
+   commit
+   branch alice
+   checkout alice
+   commit
+   checkout main
+   branch bob
+   checkout bob
+   commit
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:70%;">
+<div class="fragment" data-fragment-index="0">
+<p>Alice fixes an obvious error <code>file.txt</code></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource {diff} number-lines code-with-copy"><code class="sourceCode"><span id="cb13-1"><a href=""></a>-This course is lame</span>
+<span id="cb13-2"><a href=""></a>+This course is nice!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment" data-fragment-index="1">
+<p>Bob is doing the same</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource {diff} number-lines code-with-copy"><code class="sourceCode"><span id="cb14-1"><a href=""></a>-This course is lame</span>
+<span id="cb14-2"><a href=""></a>+This course is awesome!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="conflicts-1" class="slide level2 leftalign center">
+<h2>Conflicts</h2>
+<p>This creates a conflict when merging both branches</p>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">gitGraph
+   commit
+   commit
+   branch alice
+   checkout alice
+   commit
+   checkout main
+   branch bob
+   checkout main
+   merge alice
+   checkout bob
+   commit
+   checkout main
+   merge bob
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource {raw} number-lines code-with-copy"><code class="sourceCode"><span id="cb15-1"><a href=""></a>Auto-merging file.txt</span>
+<span id="cb15-2"><a href=""></a>CONFLICT (content): Merge conflict in test.txt</span>
+<span id="cb15-3"><a href=""></a>Recorded preimage for 'file.txt'</span>
+<span id="cb15-4"><a href=""></a>Automatic merge failed; fix conflicts and then commit the result.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="solving-conflicts" class="slide level2 leftalign center" data-auto-animate="true">
 <h2 data-id="quarto-animate-title">Solving conflicts</h2>
@@ -681,11 +773,11 @@
 <div class="code-with-filename-file">
 <pre><strong>file.txt</strong></pre>
 </div>
-<div class="sourceCode" id="cb13" data-filename="file.txt"><pre class="sourceCode numberSource raw number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode hljs"><span id="cb13-1" class="hljs-ln-code"><a href=""></a>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
-<span id="cb13-2" class="hljs-ln-code"><a href=""></a>This course is nice!</span>
-<span id="cb13-3" class="hljs-ln-code"><a href=""></a>=======</span>
-<span id="cb13-4" class="hljs-ln-code"><a href=""></a>This course is awesome!</span>
-<span id="cb13-5" class="hljs-ln-code"><a href=""></a>&gt;&gt;&gt;&gt;&gt;&gt;&gt; bob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16" data-filename="file.txt"><pre class="sourceCode numberSource raw number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode hljs"><span id="cb16-1" class="hljs-ln-code"><a href=""></a>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span>
+<span id="cb16-2" class="hljs-ln-code"><a href=""></a>This course is nice!</span>
+<span id="cb16-3" class="hljs-ln-code"><a href=""></a>=======</span>
+<span id="cb16-4" class="hljs-ln-code"><a href=""></a>This course is awesome!</span>
+<span id="cb16-5" class="hljs-ln-code"><a href=""></a>&gt;&gt;&gt;&gt;&gt;&gt;&gt; bob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="solving-conflicts-1" class="slide level2 leftalign center" data-auto-animate="true" data-visibility="uncounted">
@@ -695,12 +787,12 @@
 <div class="code-with-filename-file">
 <pre><strong>file.txt</strong></pre>
 </div>
-<div class="sourceCode" id="cb14" data-filename="file.txt"><pre class="sourceCode numberSource raw number-lines code-with-copy"><code class="sourceCode"><span id="cb14-1"><a href=""></a>This course is awesome! </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17" data-filename="file.txt"><pre class="sourceCode numberSource raw number-lines code-with-copy"><code class="sourceCode"><span id="cb17-1"><a href=""></a>This course is awesome!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <p>After resolving the conflict, you have to commit your changes</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource {sh} number-lines code-with-copy"><code class="sourceCode"><span id="cb15-1"><a href=""></a>git add file.txt</span>
-<span id="cb15-2"><a href=""></a>git commit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource {sh} number-lines code-with-copy"><code class="sourceCode"><span id="cb18-1"><a href=""></a>git add file.txt</span>
+<span id="cb18-2"><a href=""></a>git commit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

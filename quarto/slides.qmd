@@ -205,6 +205,25 @@ git config --global user.name "Your Name"
 git config --global user.email "youremail@yourdomain.com"
 ```
 
+## Is this all ?
+
+::: {.fragmen fragment-index=1}
+Basically Yes! 
+:::
+
+::: {.fragment fragment-index=2}
+But only if you are working alone and you don’t want to test something. 
+:::
+
+
+
+
+
+
+
+
+
+# Testing
 
 # Branches
 
@@ -280,15 +299,86 @@ By default, git will perform a fast-forward merge and omit the merge commit.
 
 
 
+# Collaboration
 
+## Conflicts {.leftalign}
 
+Collaboration can lead to disagreements
 
+:::: {.columns}
 
+::: {.column width="30%"}
 
+```{mermaid}
+gitGraph
+   commit
+   commit
+   branch alice
+   checkout alice
+   commit
+   checkout main
+   branch bob
+   checkout bob
+   commit
+```
+
+:::
+
+::: {.column width="70%"}
+
+::: {.fragment fragment-index=0}
+Alice fixes an obvious error `file.txt`
+
+```{diff}
+-This course is lame
++This course is nice!
+```
+:::
+
+::: {.fragment fragment-index=1}
+Bob is doing the same
+
+```{diff}
+-This course is lame
++This course is awesome!
+```
+:::
+
+:::
+
+::::
+
+## Conflicts {.leftalign}
+
+This creates a conflict when merging both branches
+
+```{mermaid}
+gitGraph
+   commit
+   commit
+   branch alice
+   checkout alice
+   commit
+   checkout main
+   branch bob
+   checkout main
+   merge alice
+   checkout bob
+   commit
+   checkout main
+   merge bob
+```
+
+```{raw}
+Auto-merging file.txt
+CONFLICT (content): Merge conflict in test.txt
+Recorded preimage for 'file.txt'
+Automatic merge failed; fix conflicts and then commit the result.
+```
 ## Solving conflicts {auto-animate=true .leftalign}
 
 Solving conflicts requires **your decision**
-   
+
 ```{.raw filename=file.txt}
 <<<<<<< HEAD
 This course is nice!
@@ -302,7 +392,7 @@ This course is awesome!
 Solving conflicts requires **your decision**
 
 ```{.raw filename=file.txt}
-This course is awesome! 
+This course is awesome!
 ```
 
 :::{.fragment}
@@ -312,3 +402,6 @@ git add file.txt
 git commit
 ```
 :::
+
+
+
