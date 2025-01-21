@@ -1,0 +1,656 @@
+---
+title: Command Line Interface 
+format:
+  revealjs:
+    transition: slide
+    slide-number: true
+    code-background: true
+    # logo: ../../static/logos.png
+    # footer: "[Generic Software Skills](../../index.html) | [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/)"
+    theme: [default, custom.scss]
+    chalkboard:
+      buttons: true
+    navigation-mode: linear
+    auto-stretch: true
+    center: true
+    mermaid:
+      theme: default
+
+execute:
+  cache: true
+---
+# For the Windows Users 📣
+
+Download and Install GIT  [https://git-scm.com/downloads/win ](https://git-scm.com/downloads/win )
+
+#  What is a `C`ommand `L`ine `I`nterface ?
+
+## `C`ommand `L`ine `I`nterface (CLI) 
+:::{.center}
+- Interacting with the computer using text commands
+- All operating systems have a CLI
+- The most common CLI is the `bash` shell 
+![](terminal.png){width=60%}
+:::
+
+
+## The `bash/Power` shell
+:::{.leftalign}
+:::{.fragment fragment-index=0}
+`Bash` developed in 1989 by Brian Fox wirtten in `C`
+
+- Syntax is defacto standard for Unix-like systems (Linux and MacOS) 
+- Open Source
+:::
+
+:::{.fragment fragment-index=1}
+`Powershell` developed by Microsoft in 2006.
+
+- Syntax is similar to `bash` 
+- Not open source
+:::
+:::
+
+
+## Why use the CLI ?
+:::{.leftalign}
+:::{.fragment fragment-index=0 .justify}
+- Some programs have no graphical user interface
+:::
+:::{.fragment fragment-index=2 .justify}
+- more powerfull
+:::
+:::{.fragment fragment-index=3 .justify}
+- interact with remote computers (Levante)
+:::
+:::
+
+
+
+
+## More powerfull ? 
+- **all** tasks faster on the CPU side (not necessarly on human side)
+- finer control in the interaction with the computer
+- repated tasks can be automated
+
+## Example
+Find and rename all files which are of type `.nc`
+
+:::: {.columns} 
+
+::: {.column width="20%"}
+
+Task
+
+Find
+
+Rename
+:::
+
+::: {.column width="40%"}
+GUI
+
+easy
+
+teadious
+:::
+
+::: {.column width="40%"}
+Terminal
+
+easy 
+
+easy 
+:::
+
+
+::::
+
+. . .
+
+``` {.sh}
+find . -name "*.nc" -exec mv {} right_name{} \;
+```
+
+. . .
+
+You can use GitHub Copilot/ChatGPT/... to write the command for you
+
+. . .
+
+❗️But you should understand what the command does❗️
+
+
+## Understanding the Structure 
+```{.sh}
+dominichillenkotter@MacBook-Pro-von-Dominic-2:~/Desktop>
+```
+- User followed by the current location
+-  `~` equivalent to `/Users/dominichillenkotter`
+
+## Navigation 
+Use `pwd` to see the `p`resent `w`ork `d`irectory
+```{.sh}
+pwd
+/Users/dominichillenkotter/Desktop
+```
+. . .
+
+Use `ls` to `l`i`s`t everything in a directory
+```{.sh}
+ls
+IMPRS   Private
+``` 
+. . .
+
+Use `cd` to `c`hange `d`irectory
+```{.sh}
+cd IMPRS   
+``` 
+
+## Create a file
+
+
+`mkdir` to `m`a`k`e `dir`ectory
+```{sh}
+mkdir directory_name
+```
+
+create a file
+```{sh}
+touch file.txt
+```
+
+
+## So far ? 
+
+. . .
+
+🥱
+
+## Using Bash effectivly
+Making a whoopsy
+
+Create a file `create.sh`
+```{.sh}
+#!/bin/bash
+
+for i in {1..1000}
+do
+  touch "test_${i}.txt"
+done
+```
+
+. . .
+
+execute this file by typing **either option**
+```{.sh}
+bash create.sh 
+  ❗️or❗️ 
+./create.sh
+```
+
+
+## 
+![](mistake.png)
+
+## How can I rename all files ? 
+They should be named `file_1.txt`, `file_2.txt`, ...
+ **not**
+`test_1.txt`, `test_2.txt`, ...
+
+Rename a file by `m`o`v`e it `mv` 
+```{.sh}
+mv old_name new_name
+```
+Can also be used for actual moving
+```{.sh}
+mv file.txt /path/to/new_location/new_name.txt
+```
+
+## How to make it effective ?
+Typing in all the names is not an option
+```{.sh}
+mv test_1.txt file_1.txt
+mv test_2.txt file_2.txt
+...
+```
+
+. . .
+
+How can we automate this ?
+
+## Fixing the whoopsy
+Create a file `rename.sh`
+```{.sh}
+#!/bin/bash
+
+for i in {1..1000}
+do
+  mv "test_${i}.txt" "file_${i}.txt"
+done
+```
+
+##
+![](success.png)
+
+
+
+## As easy as **1, 2, 3**
+```{.bash code-line-numbers="3-5"}
+mkdir my_repo
+cd my_repo
+git init .  # Initialize a repository
+git add .  # Add the whole directory content (don't do that)
+git commit -m "Initial commit"  # Commit your changes
+```
+
+```{mermaid}
+gitGraph
+   commit id: "df21a: Initial commit"
+```
+
+## Sequence of snapshots
+
+Commits are linked to form a sequence of snapshots:
+
+```bash
+echo "hello" > world.txt
+git add world.txt
+git commit -m "add world"
+```
+
+```{mermaid}
+gitGraph
+   commit id: "df21a: Initial commit"
+   commit id: "315f2: add world"
+```
+## The basic workflow
+
+* Git offers plenty of functionality that is extensively documented
+
+* You will only need a **handful of commands** in your day to day work:
+
+  ```bash
+  git status  # show which files have changed
+  git diff my_file  # show what has changed
+  git add my_file  # stage changes
+  git commit  # commit your changes
+   ```
+
+
+## Configuration
+
+* Each commit is attributed to an author
+
+* The concept or authorship is heavily used on other platforms (e.g. GitLab)
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "youremail@yourdomain.com"
+```
+
+## Is this all ?
+
+::: {.fragmen fragment-index=1}
+Basically Yes! 
+:::
+
+::: {.fragment fragment-index=2}
+But only if you are working alone and you don’t want to test something. 
+:::
+
+
+
+
+
+
+
+
+
+# Testing
+
+## Branches
+
+::: {.incremental}
+* Are versions of the code identified with a name (besides the existing hash)
+* Are used to encapsulate the changes required for a feature/bugfix
+* Allow incremental development without impacting the other branches
+:::
+
+::: {.notes}
+Make sure to introduce feature and bugfix
+:::
+
+## Create a branch {.leftalign}
+
+Create a branch `develop` to work on a feature
+
+```bash
+git branch develop
+git switch develop
+```
+   
+```{mermaid}
+gitGraph
+   commit
+   commit
+   branch develop
+   checkout develop
+   commit
+   commit
+```
+
+::: {.fragment fragment-index=0}
+Show differences between two branches
+```bash
+git diff develop..main
+```
+:::
+
+::: {.notes}
+* Git branches are just pointers to a hash!
+* Sometimes it is nice to visualize a branch as a sequence of commits (e.g. "feature branch"), but technically it is just a label for a commit
+:::
+
+## Merge a branch
+
+Merge the commits of `develop` into `main`
+
+```bash
+git switch main
+git merge develop
+```
+
+```{mermaid}
+gitGraph
+   commit
+   commit
+   branch develop
+   checkout develop
+   commit
+   commit
+   checkout main
+   merge develop
+```
+
+:::{.notes}
+After the example: ask about differences to graph and their git log.
+By default, git will perform a fast-forward merge and omit the merge commit.
+:::
+
+
+
+
+
+
+# Collaboration
+
+## Conflicts {.leftalign}
+
+Collaboration can lead to disagreements
+
+:::: {.columns}
+
+::: {.column width="30%"}
+
+```{mermaid}
+gitGraph
+   commit
+   commit
+   branch alice
+   checkout alice
+   commit
+   checkout main
+   branch bob
+   checkout bob
+   commit
+```
+
+:::
+
+::: {.column width="70%"}
+
+::: {.fragment fragment-index=0}
+Alice fixes an obvious error `file.txt`
+
+```{diff}
+-This course is lame
++This course is nice!
+```
+:::
+
+::: {.fragment fragment-index=1}
+Bob is doing the same
+
+```{diff}
+-This course is lame
++This course is awesome!
+```
+:::
+
+:::
+
+::::
+
+## Conflicts {.leftalign}
+
+This creates a conflict when merging both branches
+
+
+
+
+```{mermaid}
+gitGraph
+   commit
+   commit
+   branch alice
+   checkout alice
+   commit
+   checkout main
+   branch bob
+   checkout main
+   merge alice
+   checkout bob
+   commit
+   checkout main
+   merge bob
+```
+
+```{raw}
+Auto-merging file.txt
+CONFLICT (content): Merge conflict in test.txt
+Recorded preimage for 'file.txt'
+Automatic merge failed; fix conflicts and then commit the result.
+```
+## Solving conflicts {auto-animate=true .leftalign}
+
+Solving conflicts requires **your decision**
+
+```{.raw filename=file.txt}
+<<<<<<< HEAD
+This course is nice!
+=======
+This course is awesome!
+>>>>>>> bob
+```
+
+## Solving conflicts {auto-animate=true visibility="uncounted" .leftalign}
+
+Solving conflicts requires **your decision**
+
+```{.raw filename=file.txt}
+This course is awesome!
+```
+
+:::{.fragment}
+After resolving the conflict, you have to commit your changes
+```{sh}
+git add file.txt
+git commit
+```
+:::
+
+
+# Best practices
+
+Commits should deal with only one task; one logical unit
+
+* Ensure regular commits to track progress effectively
+* Commit each fix or task independently for clarity and easier management
+* Commit self-consistent (i.e. working) states
+
+## Best practices {visibility="uncounted"}
+
+Write **meaningful** commit messages
+
+1. Use the **imperative mood** in the subject line (**what** is done)
+1. **Limit** the subject line to 50 characters
+1. Use the body to elaborate **why** changes have been
+performed
+
+## {.rightalign}
+
+```{raw}
+ice: Fix freeing uninitialized pointers
+
+Automatically cleaned up pointers need to be initialized before exiting
+their scope.  In this case, they need to be initialized to NULL before
+any return statement.
+
+Fixes: 90f821d72e11 ("ice: avoid unnecessary devm_ usage")
+Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+Reviewed-by: Jiri Pirko <jiri@nvidia.com>
+Reviewed-by: Simon Horman <horms@kernel.org>
+Signed-off-by: Tony Nguyen <anthony.l.nguyen@intel.com>
+```
+
+Example from [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=90ca6956d3834db4060f87700e2fcbb699c4e4fd)
+
+# Decentralized version control
+
+* Git is a **de**centralized version control system
+* Each repository contains the full project history
+* _Technically_ there is no single point of truth^[_Practically_ teams agree on one main repo]
+
+## Remotes {auto-animate=true}
+
+* Adding a remote repository
+  ```bash
+  git remote add origin <PATH_TO_REPO>
+  ```
+* List the available remotes
+  ```bash
+  git remote -v
+  ```
+* Push your local references to the remote repo
+  ```bash
+  git push origin <YOUR_BRANCH>
+  ```
+* Pull remote changes to your local repo
+  ```bash
+  git pull origin <YOUR_BRANCH>
+  ```
+
+## Remotes {auto-animate=true visibility="uncounted"}
+
+* Adding a remote repository
+  ```bash
+  git remote add origin <PATH_TO_REPO>
+  ```
+* List the available remotes
+  ```bash
+  git remote -v
+  ```
+* Push your local references to the remote repo
+  ```bash
+  git push -u origin <YOUR_BRANCH>
+  ```
+* Pull remote changes to your local repo
+  ```bash
+  git pull
+  ```
+
+## Github and GitLab
+
+* There are many services to host git repositories
+* They offer plenty of additional functionality (merge/pull requests, code review, automated testing, ...)
+* Github offers by far the largest user base, while GitLab (as opens-source solution) is often self-hosted
+
+:::fragment
+
+
+:::
+
+
+
+## Take home messages
+
+* You should use git frequently!
+* Industry is using it as de facto standard
+* Use branches to organize your work
+
+
+# Shotgun buffet
+
+## Rebase vs merge
+
+Instead of merging branches, one can also [rebase](https://git-scm.com/book/en/v2/Git-Branching-Rebasing)
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{mermaid}
+%%{init: {'gitGraph': {'showCommitLabel': false}} }%%
+gitGraph
+   commit
+   commit
+   branch develop
+   checkout develop
+   commit
+   commit
+   checkout main
+   commit
+```
+:::
+
+::: {.column width="50%"}
+```{mermaid}
+%%{init: {'gitGraph': {'showCommitLabel': false}} }%%
+gitGraph
+   commit
+   commit
+   commit
+   branch develop
+   checkout develop
+   commit
+   commit
+```
+:::
+
+::::
+Rebasing retains a linear history<br/> by **changing the commit history (!!!)**
+
+## Forks
+
+* A fork is a copy of a repository on server side
+* Used to work on public repositories without granting ownership
+* Standard names for locally defined remotes:
+  ```{raw}
+  origin	https://github.com/lkluft/numpy (fetch)
+  origin	https://github.com/lkluft/numpy (push)
+  upstream	https://github.com/numpy/numpy (fetch)
+  upstream	https://github.com/numpy/numpy (push)
+
+  ```
+
+## Tools for graphical merge
+
+VSCode, meld
+
+
+# Further reading
+
+* [The official git documentation pages](https://git-scm.com/doc)
+* [Introductions by GitLab](https://university.gitlab.com/pages/getting-started)
+* [Software Carpentry on git](https://swcarpentry.github.io/git-novice/)
